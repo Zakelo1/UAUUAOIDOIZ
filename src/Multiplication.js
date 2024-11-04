@@ -4,8 +4,13 @@ const Multiplication = () => {
     const [premiernombre, setpremiernombre] = useState(0)
     const [deuxièmenombre, setdeuxièmenombre] = useState(0)
     const [produits, setproduits] = useState(null)
+    const [historique, sethistorique] = useState([])
     const Multiplication1 = () =>{
         setproduits(premiernombre * deuxièmenombre)
+        sethistorique([...historique, `${premiernombre} * ${deuxièmenombre} = ${produits}`])
+    }
+    const supprimer = (index) =>{
+        sethistorique(historique.filter((_, i) => i !== index));
     }
     const premiernombrechange = (event) => {
         setpremiernombre(Number(event.target.value))
@@ -13,6 +18,7 @@ const Multiplication = () => {
     const deuxièmenombrechange = (event) => {
         setdeuxièmenombre(Number(event.target.value))
     }
+   
     return (
         <div>
             <h2>Régale toi Nabil</h2>
@@ -28,6 +34,15 @@ const Multiplication = () => {
             {produits !== null && (
                 <p>Le produits est : {produits}</p>
             )}
+            <ul>
+                {historique.map((item, index) => (
+                    <li key={index} >{item}
+                    <button onClick={()=> supprimer(index)}
+
+                    >Supprime</button>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };
