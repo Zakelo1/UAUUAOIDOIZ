@@ -1,4 +1,8 @@
 import { useState } from 'react';
+import suppsound from './assets/supprimer.mp3'
+import multitog from './assets/multitog.mp3'
+import multi from './assets/multipli.mp3'
+import pol from './assets/pol.mp3'
 
 const Multiplication = () => {
     const [premierNombre, setPremierNombre] = useState("");
@@ -12,6 +16,7 @@ const Multiplication = () => {
         return acc * (parseFloat(partie[0]) * parseFloat(partie[1]));
         }, 1);
     setProduit(resulat)
+        audioplaymultitog();
     }
     const selection = (index) => {
         if (select.includes(index)){
@@ -26,10 +31,33 @@ const Multiplication = () => {
         const resultat = premierNombre * deuxiemeNombre;
         setProduit(resultat);
         setHistorique([...historique, `${premierNombre} * ${deuxiemeNombre} = ${resultat}`]);
-    };
+        if (Number(premierNombre) === 49 && Number(deuxiemeNombre) === 3){
+            audioplaypol()
+        }
+        else {
+            audioplaymulti()
+        }
 
+    };
+    const audioplaypol = () => {
+        const audiopol = new Audio(pol)
+        audiopol.play()
+    }
+    const audioplaymulti = () => {
+        const audiomulti = new Audio(multi)
+        audiomulti.play()
+    }
+    const audioplaymultitog = () => {
+        const audiomultitog = new Audio(multitog)
+        audiomultitog.play()
+    }
+    const audioplaysupp = () => {
+        const audiosupp = new Audio(suppsound);
+        audiosupp.play();
+    }
     const supprimer = (index) => {
         setHistorique(historique.filter((_, i) => i !== index));
+        audioplaysupp();
     };
 
     const handlePremierNombreChange = (event) => {
@@ -57,8 +85,11 @@ const Multiplication = () => {
                 value={deuxiemeNombre}
                 onChange={handleDeuxiemeNombreChange}
             />
-            <button onClick={multiplier}>Multiplier</button>
-            <button onClick={selectionnermulti}>Mutiplierlessss</button>
+            <button onClick={multiplier} 
+            disabled={premierNombre === "" || deuxiemeNombre ===""} 
+            >Multiplier</button>
+            <button onClick={selectionnermulti}
+            disabled={select.length=== 0} >Mutiplierlessss</button>
             {produit !== null && <p>Le produit total est : {produit}</p>}
             <ul>
                 {historique.map((item, index) => (
