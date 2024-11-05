@@ -33,11 +33,13 @@ const Multiplication = () => {
     };
 
     const handlePremierNombreChange = (event) => {
-        setPremierNombre(Number(event.target.value));
+        const value = event.target.value
+        setPremierNombre(value === ""?"" : Number(value));
     };
 
     const handleDeuxiemeNombreChange = (event) => {
-        setDeuxiemeNombre(Number(event.target.value));
+        const value = event.target.value
+        setDeuxiemeNombre(value === ""?"" : Number(value));
     };
 
     return (
