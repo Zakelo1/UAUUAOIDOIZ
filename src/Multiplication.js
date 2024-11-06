@@ -7,6 +7,7 @@ import pol from './assets/pol.mp3'
 const Multiplication = () => {
     const [premierNombre, setPremierNombre] = useState("");
     const [deuxiemeNombre, setDeuxiemeNombre] = useState("");
+   // const [somme, setsomme] = useState(null)
     const [produit, setProduit] = useState(null);
     const [historique, setHistorique] = useState([]);
     const [select, setselect] = useState([]);
@@ -27,6 +28,10 @@ const Multiplication = () => {
         }
 
     } 
+   // const additionner = () =>{
+       // const resultatsomme = premierNombre + deuxiemeNombre
+        //setsomme(resultatsomme);
+       // setHistorique([...historique, `${premierNombre} + ${deuxiemeNombre} = ${resultatsomme}`]);}
     const multiplier = () => {
         const resultat = premierNombre * deuxiemeNombre;
         setProduit(resultat);
